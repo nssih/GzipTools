@@ -1,0 +1,71 @@
+<idea-plugin>
+
+    <!-- 插件唯一ID（不能改） -->
+    <id>com.example.gziptolls</id>
+
+    <!-- 插件名称（UI展示） -->
+    <name>Gzip Tools</name>
+
+    <!-- 作者信息 -->
+    <vendor email="296222957@qq.com" url="https://github.com/yourname">
+        fang zhou
+    </vendor>
+
+    <!-- 插件描述（支持 HTML） -->
+    <description><![CDATA[
+        <h3>Gzip Tools</h3>
+        <p>A powerful smart tool for data processing:</p>
+
+        <ul>
+          <li>1 - Smart detection (Base64 / GZIP / JSON / XML)</li>
+          <li>2 - One-click decode / decompress / format</li>
+          <li>3 - JSON & XML pretty formatting</li>
+          <li>4 - Base64 auto decode</li>
+          <li>5 - GZIP auto decompress</li>
+          <li>6 - Clean and intuitive UI</li>
+        </ul>
+
+        <p><b>Usage:</b> Select text → Right click → Gzip Tools</p>
+    ]]></description>
+
+    <!-- 版本兼容（非常重要） -->
+    <idea-version since-build="231" until-build="241.*"/>
+
+    <!-- 依赖（基础平台） -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- 动作（右键菜单） -->
+    <actions>
+
+        <!-- 父菜单 -->
+        <group id="GzipToolsGroup"
+               text="Gzip Tools"
+               description="Smart format and decode tools"
+               popup="true">
+
+            <separator/>
+
+            <!-- 手动功能（保留） -->
+            <!-- 解压处理 -->
+            <action id="GzipTools.Uncompress"
+                    class="com.example.handler.GzipUncompressAction"
+                    text="Uncompress"/>
+
+            <!-- 带时间戳压缩处理 -->
+            <action id="GzipTools.CompressWithTime"
+                    class="com.example.handler.GzipCompressWithTimeAction"
+                    text="Compress (With Timestamp)"/>
+
+            <!-- 不带时间戳压缩处理 -->
+            <action id="GzipTools.CompressNoTime"
+                    class="com.example.handler.GzipCompressNoTimeAction"
+                    text="Compress (No Timestamp)"/>
+
+            <!-- 挂到右键 -->
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+
+        </group>
+
+    </actions>
+
+</idea-plugin>
