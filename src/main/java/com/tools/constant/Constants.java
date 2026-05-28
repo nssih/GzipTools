@@ -1,4 +1,4 @@
-package com.example.constant;
+package com.tools.constant;
 
 public class Constants {
 

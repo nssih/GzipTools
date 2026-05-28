@@ -1,4 +1,4 @@
-package com.example.action;
+package com.tools.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

@@ -1,9 +1,9 @@
-package com.example.handler;
+package com.tools.handler;
 
-import com.example.action.BaseAction;
-import com.example.constant.Constants;
-import com.example.core.GzipOpertion;
-import com.example.show.Show;
+import com.tools.action.BaseAction;
+import com.tools.constant.Constants;
+import com.tools.core.GzipOpertion;
+import com.tools.show.Show;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
 import java.util.Base64;

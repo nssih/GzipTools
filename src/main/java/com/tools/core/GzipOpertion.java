@@ -1,6 +1,6 @@
-package com.example.core;
+package com.tools.core;
 
-import com.example.constant.Constants;
+import com.tools.constant.Constants;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

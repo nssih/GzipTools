@@ -1,13 +1,13 @@
 <idea-plugin>
 
     <!-- 插件唯一ID（不能改） -->
-    <id>com.example.gziptolls</id>
+    <id>com.tools.gziptolls</id>
 
     <!-- 插件名称（UI展示） -->
     <name>Gzip Tools</name>
 
     <!-- 作者信息 -->
-    <vendor email="296222957@qq.com" url="https://github.com/yourname">
+    <vendor email="296222957@qq.com" url="https://github.com/nssih/GzipTools">
         fang zhou
     </vendor>
 
@@ -48,17 +48,17 @@
             <!-- 手动功能（保留） -->
             <!-- 解压处理 -->
             <action id="GzipTools.Uncompress"
-                    class="com.example.handler.GzipUncompressAction"
+                    class="com.tools.handler.GzipUncompressAction"
                     text="Uncompress"/>
 
             <!-- 带时间戳压缩处理 -->
             <action id="GzipTools.CompressWithTime"
-                    class="com.example.handler.GzipCompressWithTimeAction"
+                    class="com.tools.handler.GzipCompressWithTimeAction"
                     text="Compress (With Timestamp)"/>
 
             <!-- 不带时间戳压缩处理 -->
             <action id="GzipTools.CompressNoTime"
-                    class="com.example.handler.GzipCompressNoTimeAction"
+                    class="com.tools.handler.GzipCompressNoTimeAction"
                     text="Compress (No Timestamp)"/>
 
             <!-- 挂到右键 -->

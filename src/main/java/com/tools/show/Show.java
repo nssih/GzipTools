@@ -1,4 +1,4 @@
-package com.example.show;
+package com.tools.show;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -6,7 +6,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import com.example.constant.Constants;
+import com.tools.constant.Constants;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
