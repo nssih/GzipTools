@@ -19,7 +19,7 @@ public class GzipCompressNoTimeAction extends BaseAction {
 
         String result = GzipOpertion.compressSafe(text, false);
 
-        Show.showResult(result);
+        Show.showResult(result, 0L);
     }
 }
 

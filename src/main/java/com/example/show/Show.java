@@ -17,15 +17,18 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.zip.GZIPInputStream;
 
 public class Show {
 
-    public static void showResult(String text) {
+    public static void showResult(String text, long mtime) {
 
         JDialog dialog = new JDialog();
-        dialog.setTitle("Result");
+        dialog.setTitle(Constants.CONTENT);
         dialog.setModal(true);
 
         final String originalText = text;
@@ -35,7 +38,35 @@ public class Show {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
 
+        JTextArea lineNumbers = new JTextArea();
+        lineNumbers.setEditable(false);
+        lineNumbers.setFocusable(false);
+        lineNumbers.setBackground(new Color(60, 63, 65));
+        lineNumbers.setForeground(new Color(128, 128, 128));
+        lineNumbers.setFont(textArea.getFont());
+        lineNumbers.setMargin(new Insets(0, 4, 0, 4));
+
+        Runnable updateLineNumbers = () -> {
+            String t = textArea.getText();
+            int lines = textArea.getLineCount();
+            if (lines > 1 && t.endsWith("\n")) lines--;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= lines; i++) {
+                if (i > 1) sb.append("\n");
+                sb.append(i);
+            }
+            lineNumbers.setText(sb.toString());
+        };
+        updateLineNumbers.run();
+
+        textArea.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { updateLineNumbers.run(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { updateLineNumbers.run(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { updateLineNumbers.run(); }
+        });
+
         JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setRowHeaderView(lineNumbers);
         scrollPane.setPreferredSize(new Dimension(700, 500));
 
         // size标签（单独一行）
@@ -118,9 +149,18 @@ public class Show {
         buttonPanel.add(right, BorderLayout.EAST);
 
         // 第二层：size行
-        JPanel sizePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel sizePanel = new JPanel(new BorderLayout());
         sizePanel.setOpaque(false);
-        sizePanel.add(sizeLabel);
+        sizePanel.add(sizeLabel, BorderLayout.WEST);
+
+        if (mtime > 0) {
+            String timeStr = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT)
+                    .withZone(ZoneId.systemDefault())
+                    .format(Instant.ofEpochSecond(mtime));
+            JLabel timeLabel = new JLabel("Created: " + timeStr);
+            timeLabel.setForeground(new Color(140, 140, 140));
+            sizePanel.add(timeLabel, BorderLayout.EAST);
+        }
 
         // 底部容器（size在上，按钮在下）
         JPanel bottom = new JPanel(new BorderLayout());
@@ -231,12 +271,12 @@ public class Show {
 
         // JSON
         if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
-            return formatJson(input);
+            return formatJson(input).stripTrailing();
         }
 
         // XML（注意这里必须是 < 不是 &lt;）
         if (trimmed.startsWith("<")) {
-            return formatXml(input);
+            return formatXml(input).stripTrailing();
         }
 
         return input;
