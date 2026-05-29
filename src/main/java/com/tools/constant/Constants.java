@@ -13,5 +13,5 @@ public class Constants {
     public static final String GROUP_ID = "GzipTools";
 
     public static final String CONTENT = "Content";
-    public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss: ";
+    public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }
