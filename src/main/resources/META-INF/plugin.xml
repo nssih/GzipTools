@@ -28,12 +28,11 @@
         <p><b>Usage:</b> Select text → Right click → Gzip Tools</p>
     ]]></description>
 
-    <change-notes>
-        <![CDATA[
-    Version 1.0.1:
-    - Fix gzip decompression Created time show issue
-    ]]>
-    </change-notes>
+    <!--  版本更新的内容  -->
+    <change-notes><![CDATA[
+        Version 1.0.1:
+        - Fix gzip decompression Created time show issue
+    ]]></change-notes>
 
     <!-- 版本兼容（非常重要） -->
     <idea-version since-build="231" until-build="241.*"/>
