@@ -10,6 +10,7 @@ import com.tools.constant.Constants;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.application.ApplicationManager;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -26,6 +27,11 @@ import java.util.zip.GZIPInputStream;
 public class Show {
 
     public static void showResult(String text, long mtime) {
+        // 确保 dialog 在 EDT 上创建，避免触发平台的线程断言（IU-262.x DaemonFusReporter bug）
+        ApplicationManager.getApplication().invokeLater(() -> showResultOnEdt(text, mtime));
+    }
+
+    private static void showResultOnEdt(String text, long mtime) {
 
         JDialog dialog = new JDialog();
         dialog.setTitle(Constants.CONTENT);
